@@ -25,13 +25,33 @@ def isolate(list = [])
     end
 end
 
+def evaluate(hash, array)
 
-x = gets
-puts "#{x}"
-puts "calling separate"
-x = separate(x)
-puts "#{x}"
-puts "calling isolate"
-x = isolate(x)
-puts "#{x}"
+    if array[0] == "+"
+        return array[1].to_i + array[2].to_i
+    elsif array[0] == "-"
+        return array[1].to_i - array[2].to_i
+    elsif array[0] == "/"
+        return array[1].to_i / array[2].to_i
+    elsif array[0] == "*"
+        return array[1].to_i * array[2].to_i
+    elsif array[0] == "define"
+        hash[array[1]] = array[2]
+        return array[1]
+    end
+end
+
+storage = {}
+while true
+    x = gets.chomp
+    if x == "quit"
+        break
+    else
+        x = separate(x)
+        x = isolate(x)
+        x = evaluate(storage, x)
+        puts "#{x}"
+    end
+end
+
 
