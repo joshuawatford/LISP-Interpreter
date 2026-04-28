@@ -25,18 +25,26 @@ def isolate(list = [])
     end
 end
 
+def identify(hash, string)
+    if hash.key?(string)
+        return hash[string].to_i
+    else
+        return string.to_i
+    end
+end
+
 def evaluate(hash, array)
 
     if array[0] == "+"
-        return array[1].to_i + array[2].to_i
+        return identify(hash, array[1]) + identify(hash, array[2])
     elsif array[0] == "-"
-        return array[1].to_i - array[2].to_i
+        return identify(hash, array[1]) - identify(hash, array[2])
     elsif array[0] == "/"
-        return array[1].to_i / array[2].to_i
+        return identify(hash, array[1]) / identify(hash, array[2])
     elsif array[0] == "*"
-        return array[1].to_i * array[2].to_i
+        return identify(hash, array[1]) * identify(hash, array[2])
     elsif array[0] == "define"
-        hash[array[1]] = array[2]
+        hash[array[1]] = identify(hash, array[2])
         return array[1]
     end
 end
