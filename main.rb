@@ -26,7 +26,10 @@ def isolate(list = [])
 end
 
 def identify(hash, string)
-    if hash.key?(string)
+
+    if string.is_a?(Array)
+        return evaluate(hash, string)
+    elsif hash.key?(string)
         return hash[string].to_i
     else
         return string.to_i
