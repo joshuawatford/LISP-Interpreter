@@ -47,8 +47,13 @@ def evaluate(hash, array)
     elsif array[0] == "*"
         return identify(hash, array[1]) * identify(hash, array[2])
     elsif array[0] == "define"
-        hash[array[1]] = identify(hash, array[2])
-        return array[1]
+        if array[1].is_a?(Array)
+            hash[array[1][0]] = [array[1][1..], array[2]]
+            return array[1][0]
+        else
+            hash[array[1]] = identify(hash, array[2])
+            return array[1]
+        end
     end
 end
 
